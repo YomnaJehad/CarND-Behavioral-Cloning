@@ -1,5 +1,4 @@
-print('koko ni iru')
-#First do the imports
+### First, import some important libraries
 import csv
 import numpy as np
 import cv2
@@ -9,15 +8,14 @@ from keras.layers import Dropout, Conv2D, Flatten, Dense, Lambda, Cropping2D
 from keras.layers.pooling import MaxPooling2D
 from keras.models import Model, Sequential
 
+### Read the measurements and the files names from the .csv file
+csvlines = [] ### append the files names and the measurements here
 
-#Now Read my data
-csvlines=[]
-
-with open('./data/driving_log.csv') as csvfile:
-     reader = csv.reader(csvfile)
-     for line in reader:
+with open('/root/Desktop/data/driving_log.csv') as csvfile:
+    reader = csv.reader(csvfile)
+    for line in reader:
         csvlines.append(line)
-        
+
 ### Append the measured angles and the images in numpy arrays and display a test image with dimensions
 images = []
 measurements = []
@@ -87,7 +85,7 @@ model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
 history_object = model.fit(X_train, y_train, validation_split = 0.2,epochs = 5, shuffle = True)
 model.save('model.h5')
-    
+
 ### Plot the training and validation loss
 plt.plot(history_object.history['loss'])
 plt.plot(history_object.history['val_loss'])
