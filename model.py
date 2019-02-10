@@ -1,4 +1,4 @@
-### First, import some important libraries
+### imports
 import csv
 import numpy as np
 import cv2
@@ -8,8 +8,8 @@ from keras.layers import Dropout, Conv2D, Flatten, Dense, Lambda, Cropping2D
 from keras.layers.pooling import MaxPooling2D
 from keras.models import Model, Sequential
 
-### Read the measurements and the files names from the .csv file
-csvlines = [] ### append the files names and the measurements here
+### get the data from the simulator desktop
+csvlines = [] 
 
 with open('/root/Desktop/data/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
@@ -45,8 +45,6 @@ print(y_train.shape)
 
 
 ### Train the neural network to drive the car
-
-#### The first two steps are for data preprocessing then i trained the network.
 
 #### The network consists of :
 #### 1. Normalization layer
@@ -87,13 +85,13 @@ history_object = model.fit(X_train, y_train, validation_split = 0.2,epochs = 5, 
 model.save('model.h5')
 
 ### Plot the training and validation loss
-plt.plot(history_object.history['loss'])
-plt.plot(history_object.history['val_loss'])
-plt.title('model mean squared error loss')
-plt.ylabel('mean squared error loss')
-plt.xlabel('epoch')
-plt.legend(['training set', 'validation set'], loc='upper right')
-axes = plt.gca()
-axes.set_ylim([0,0.3])
-plt.savefig("trainVSvalid_error.jpg")
-plt.show()
+# plt.plot(history_object.history['loss'])
+# plt.plot(history_object.history['val_loss'])
+# plt.title('model mean squared error loss')
+# plt.ylabel('mean squared error loss')
+# plt.xlabel('epoch')
+# plt.legend(['training set', 'validation set'], loc='upper right')
+# axes = plt.gca()
+# axes.set_ylim([0,0.3])
+# plt.savefig("trainVSvalid_error.jpg")
+# plt.show()
